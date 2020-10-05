@@ -1,0 +1,27 @@
+﻿@model MVC_SQL_Project.Models.TimeSheet
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Time Entry System</h2>
+
+<div>
+    <div>
+        <div>
+            <label>Select A Name</label>
+        </div>
+        <div>
+            <select class="form-control" id="Names" name="Name Of Student">
+                <option value="0">Select a Name</option>
+                <option>Saiteja</option>
+                <option>Lakshman</option>
+                <option>Vinay</option>
+                <option>Praneeth</option>
+            </select>
+        </div>
+    </div>
+    <div style="padding-top:30px">
+        @Html.ActionLink("GO", "Details", "TimeSheets", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
