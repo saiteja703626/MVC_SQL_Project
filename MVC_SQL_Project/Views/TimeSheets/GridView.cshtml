@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MVC_SQL_Project.Models.TimeSheet>
+@{
+    ViewBag.Title = "GridView";
+}
+
+
+<div>
+    <div class="container-fluid">
+        @Html.Label("From Date")
+        @Html.TextBox("From Date")
+    </div>
+    <br />
+    <div class="container-fluid">
+        @Html.Label("To Date")
+        @Html.TextBox("To Date")
+    </div>
+    <div>
+        <button type="submit" id="CmdSearch">Search</button>
+    </div>
+</div>
+<br />
+
+<table class="table-bordered", style="border:1px solid">
+
+    <tr style="border:2px solid">
+        <th class="container-fluid" style="border:2px solid">Story</th>
+        <th class="container-fluid" style="border:2px solid">IT#</th>
+        <th class="container-fluid" style="border:2px solid">Task Description</th>
+        <th class="container-fluid" style="border:2px solid">Hours Worked</th>
+        <th class="container-fluid" style="border:2px solid">Status</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="border:1px solid">
+            <td style="border:1px solid">@item.Story</td>
+            <td style="border:1px solid">@item.IT</td>
+            <td style="border:1px solid">@item.Description</td>
+            @{
+                var time = item.CompletedDate.TimeOfDay - item.AssignedDate.TimeOfDay;
+            }
+            <td style="border:1px solid">@time</td>
+            <td style="border:1px solid">@item.Status</td>
+
+        </tr>
+
+    }
+</table>
+<br />
+<button>
+    @Html.ActionLink("Back To Details", "Details", "TimeSheets", null, new { classk = "nav-brand" })
+</button>

@@ -177,6 +177,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LoginInfo.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TimeSheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,9 +240,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\TimeSheets\Index.cshtml" />
     <Content Include="Views\TimeSheets\Details.cshtml" />
     <Content Include="Views\TimeSheets\Grid.cshtml" />
+    <Content Include="Views\TimeSheets\Error.cshtml" />
+    <Content Include="Views\TimeSheets\GridView.cshtml" />
+    <Content Include="Views\TimeSheets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

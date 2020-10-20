@@ -3,44 +3,49 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>*@
 
-<div class="row">
-    <div class="col-md-6">
-        @using (Html.BeginForm())
-        {
-            <div class="form-group">
-                @Html.LabelFor(x => x.TimeSheet.Story)
-                @Html.TextBoxFor(x => x.TimeSheet.Story, new { @class = "form-control", autocomplete = "off" })
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.ValidationSummary(false, null, new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.TimeSheet.IT)
-                @Html.TextBoxFor(x => x.TimeSheet.IT, new { @class = "form-control", autocomplete = "off" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.TimeSheet.AssignedDate)
-                @Html.TextBoxFor(x => x.TimeSheet.AssignedDate, new { @class = "form-control", autocomplete = "off", type = "date" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.TimeSheet.CompletedDate)
-                @Html.TextBoxFor(x => x.TimeSheet.CompletedDate, new { @class = "form-control", autocomplete = "off", type = "date" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.TimeSheet.Status)
-                @*@Html.TextBoxFor(x=>x.Time.Status,new { @class="form-control", autocomplete="off"})*@
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TimeSheet.Story)
+                        @Html.TextBoxFor(x => x.TimeSheet.Story, new { @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TimeSheet.IT)
+                        @Html.TextBoxFor(x => x.TimeSheet.IT, new { @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TimeSheet.AssignedDate)
+                        @Html.TextBoxFor(x => x.TimeSheet.AssignedDate, new { @class = "form-control", autocomplete = "off", type = "datetime-local"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TimeSheet.CompletedDate)
+                        @Html.TextBoxFor(x => x.TimeSheet.CompletedDate, new { @class = "form-control", autocomplete = "off", type = "datetime-local" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TimeSheet.Status)
+                        @Html.DropDownListFor(x => x.TimeSheet.Status, new SelectList(Model.Status, "Value", "Text"), new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.TimeSheet.Description)
+                        @Html.TextAreaFor(x => x.TimeSheet.Description, new { @class = "form-control", autocomplete = "off", cols = "10", rows = "10" })
+                    </div>
 
-                @Html.DropDownListFor(x => x.TimeSheet.Status, new SelectList(Model.Status, "Value", "Text"), new { @class = "form-control" })
+                    <div class="form-group">
+                        <button id="CmdSubmit" type="submit" class="btn btn-outline-secondary">Save</button>
+                    </div>
+                }
             </div>
-            <div class="form-group">
-                @Html.LabelFor(x => x.TimeSheet.Description)
-                @Html.TextBoxFor(x => x.TimeSheet.Description, new { @class = "form-control", autocomplete = "off" })
-            </div>
-
-            <div class="form-group">
-                <button id="CmdSubmit" type="submit" class="btn btn-outline-secondary">Save</button>
-            </div>
-        }
+        </div>
     </div>
-</div>
 
 

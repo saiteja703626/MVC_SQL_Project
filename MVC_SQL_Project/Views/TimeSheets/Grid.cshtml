@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<MVC_SQL_Project.Models.TimeSheet>
 @{
     ViewBag.Title = "Grid";
-    WebGrid grid = new WebGrid(canPage: true, rowsPerPage: 5);
+    WebGrid grid = new WebGrid(canPage: true, rowsPerPage: 15);
     grid.Bind(source: Model);
 }
 
-<h2>Grid</h2>
+@*<h2>Grid</h2>*@
 
 <div class="container">
     <div class="row">

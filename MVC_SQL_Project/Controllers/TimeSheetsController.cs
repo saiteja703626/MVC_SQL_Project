@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace MVC_SQL_Project.Controllers
 {
@@ -28,10 +31,10 @@ namespace MVC_SQL_Project.Controllers
         }
 
         // GET: TimeSheets
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         public ActionResult Details(int? id)
@@ -58,9 +61,8 @@ namespace MVC_SQL_Project.Controllers
             }
             dbContext.timeSheets.Add(timeSheet);
             dbContext.SaveChanges();
-            return RedirectToAction("Grid", "TimeSheets");
+            return RedirectToAction("GridView", "TimeSheets");
         }
-
         [NonAction]
         public List<TimeSheet> GetTimeSheet()
         {
@@ -84,5 +86,58 @@ namespace MVC_SQL_Project.Controllers
             List<TimeSheet> timesheet = GetTimeSheet();
             return View(timesheet);
         }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(LoginInfo loginInfo)
+        {
+                string maincon = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+                SqlConnection sqlcon = new SqlConnection(maincon);
+                string sqlquery = "select * from LoginInfo where UserName=@UserName and Password=@Password";
+                sqlcon.Open();
+                SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
+            //sqlcom.Parameters.AddWithValue("@UserName", loginInfo.UserName);
+            SqlParameter usernameparam = sqlcom.Parameters.AddWithValue("@UserName",loginInfo.UserName);
+            if (loginInfo.UserName == null)
+            {
+                usernameparam.Value = DBNull.Value;
+            }
+
+            SqlParameter passwordparam = sqlcom.Parameters.AddWithValue("@Password", loginInfo.Password);
+            if (loginInfo.Password == null)
+            {
+                passwordparam.Value = DBNull.Value;
+            }
+
+            //sqlcom.Parameters.AddWithValue("@Password", loginInfo.Password);
+            SqlDataReader sdr = sqlcom.ExecuteReader();
+            if (sdr.Read())
+            { 
+                return RedirectToAction("Details");
+            }
+            else
+            {
+                RedirectToAction("Error");
+            }
+            sqlcon.Close();
+            return View();
+        }
+
+  
+        public ActionResult GridView()
+        {
+            var timesheet = (from Time in dbContext.timeSheets select Time).ToList();
+
+            return View(timesheet);
+        }
+
+       
+
+
     }
 }
